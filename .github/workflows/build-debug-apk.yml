@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CHANNEL: prod
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -44,8 +46,6 @@ jobs:
           make android-apk-prepare
 
       - name: Build APK
-        env:
-          CHANNEL: prod
         run: make android-apk-release
 
       - name: Upload APKs
