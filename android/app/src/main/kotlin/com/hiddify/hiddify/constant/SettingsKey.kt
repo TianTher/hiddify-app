@@ -19,14 +19,7 @@ object SettingsKey {
     // cache
 
     const val STARTED_BY_USER = "${KEY_PREFIX}started_by_user"
+    const val START_ON_BOOT = "${KEY_PREFIX}start_on_boot"
     const val CONFIG_OPTIONS = "config_options_json"
 
-    const val START_CORE_ON_STARTING_SERVICE = "${KEY_PREFIX}starting_core_on_starting_service"
-
-    const val WORKING_DIR = "working_dir"
-    const val BASE_DIR = "base_dir"
-    const val TMP_DIR = "tmp_dir"
-
-    const val GRPC_PORT = "grpc_port"
-    const val GRPC_FLUTTER_PUBLIC_KEY = "grpc_flutter_public_key"
 }
