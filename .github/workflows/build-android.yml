@@ -1,0 +1,30 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [v4.0.4-patched]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-java@v5
+        with: { distribution: 'zulu', java-version: 17 }
+
+      - uses: subosito/flutter-action@v2.21.0
+        with: { flutter-version: '3.38.5', channel: 'stable', cache: true }
+
+      - uses: android-actions/setup-android@v3
+
+      - run: make android-apk-install-deps
+      - run: make android-apk-prepare
+      - run: make android-apk-release
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Hiddify-v4.0.4-APKs
+          path: build/app/outputs/flutter-apk/*.apk
+          retention-days: 90
