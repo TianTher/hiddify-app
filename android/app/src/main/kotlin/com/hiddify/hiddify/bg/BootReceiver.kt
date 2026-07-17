@@ -19,7 +19,7 @@ class BootReceiver : BroadcastReceiver() {
             else -> return
         }
         GlobalScope.launch(Dispatchers.IO) {
-            if (Settings.startedByUser) {
+            if (Settings.startOnBoot || Settings.startedByUser) {
                 withContext(Dispatchers.Main) {
                     BoxService.start()
                 }

@@ -79,6 +79,15 @@ class GeneralSettingTiles extends HookConsumerWidget {
             onChanged:
                 ref.read(hapticServiceProvider.notifier).updatePreference,
           ),
+          SwitchListTile(
+            title: const Text('开机自启'),
+            subtitle: const Text('开机后自动连接上次使用的代理'),
+            secondary: const Icon(FluentIcons.arrow_sync_circle_24_regular),
+            value: ref.watch(Preferences.startOnBoot),
+            onChanged: (value) async {
+              await ref.read(Preferences.startOnBoot.notifier).update(value);
+            },
+          ),
         ],
         if (PlatformUtils.isDesktop) ...[
           SwitchListTile(

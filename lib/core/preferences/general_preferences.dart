@@ -65,6 +65,11 @@ abstract class Preferences {
     false,
   );
 
+  static final startOnBoot = PreferencesNotifier.create<bool, bool>(
+    "start_on_boot",
+    false,
+  );
+
   static final storeReviewedByUser = PreferencesNotifier.create<bool, bool>(
     "store_reviewed_by_user",
     false,

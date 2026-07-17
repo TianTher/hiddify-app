@@ -85,6 +85,10 @@ object Settings {
         get() = preferences.getBoolean(SettingsKey.STARTED_BY_USER, false)
         set(value) = preferences.edit().putBoolean(SettingsKey.STARTED_BY_USER, value).apply()
 
+    var startOnBoot: Boolean
+        get() = preferences.getBoolean(SettingsKey.START_ON_BOOT, false)
+        set(value) = preferences.edit().putBoolean(SettingsKey.START_ON_BOOT, value).apply()
+
     fun serviceClass(): Class<*> {
         return when (serviceMode) {
             ServiceMode.VPN -> VPNService::class.java

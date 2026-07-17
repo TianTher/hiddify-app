@@ -19,6 +19,7 @@ object SettingsKey {
     // cache
 
     const val STARTED_BY_USER = "${KEY_PREFIX}started_by_user"
+    const val START_ON_BOOT = "${KEY_PREFIX}start_on_boot"
     const val CONFIG_OPTIONS = "config_options_json"
 
 }
