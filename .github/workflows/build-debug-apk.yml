@@ -1,7 +1,7 @@
 name: Build Debug APK
 
 on:
-  workflow_dispatch:  # 手动触发：在 GitHub 网页上点按钮就能构建
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -32,18 +32,28 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Clean up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL
+          rm -rf ~/.gradle/caches
+          sudo apt-get autoremove -y && sudo apt-get clean
+
       - name: Install deps
         run: make android-install-deps
 
       - name: Prepare
-        run: make android-prepare
+        run: make android-apk-prepare
 
-      - name: Build debug APK
-        run: flutter build apk --debug
+      - name: Build APK
+        run: make android-apk-release
 
-      - name: Upload APK
+      - name: Upload APKs
         uses: actions/upload-artifact@v6
         with:
-          name: Hiddify-Debug-APK
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          name: Hiddify-APKs
+          path: |
+            build/app/outputs/flutter-apk/*arm64-v8a*.apk
+            build/app/outputs/flutter-apk/*armeabi-v7a*.apk
+            build/app/outputs/flutter-apk/*x86_64*.apk
+            build/app/outputs/flutter-apk/app-release.apk
           retention-days: 90
