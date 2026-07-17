@@ -10,7 +10,7 @@ jobs:
       - uses: subosito/flutter-action@v2.21.0
         with: { flutter-version: '3.38.5', channel: 'stable', cache: true }
       - uses: android-actions/setup-android@v3
-      - run: make android-apk-install-deps
+      - run: make android-apk-install-dependencies
       - run: make android-apk-prepare
       - run: make android-apk-release
       - uses: actions/upload-artifact@v6
