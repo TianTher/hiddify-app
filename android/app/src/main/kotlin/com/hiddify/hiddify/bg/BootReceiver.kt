@@ -17,17 +17,16 @@ class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_MY_PACKAGE_REPLACED -> {
-            }
-
-            else -> return
-        }
-        GlobalScope.launch(Dispatchers.IO) {
-            if (Settings.startedByUser) {
-                withContext(Dispatchers.Main) {
-                    Settings.startCoreAfterStartingService=true //H
-                    BoxService.start()
+                GlobalScope.launch(Dispatchers.IO) {
+                    if (Settings.startedByUser) {
+                        withContext(Dispatchers.Main) {
+                            Settings.startCoreAfterStartingService = true
+                            BoxService.start()
+                        }
+                    }
                 }
             }
+            else -> return
         }
     }
 }
